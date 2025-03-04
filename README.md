@@ -64,11 +64,115 @@ Access the API documentation at `http://localhost:8000/docs` when the backend is
 
 ## Architecture
 
-[Include architecture diagram here]
+flowchart TD
+    %% External Entities
+    Student([Student/User])
+    Auth[Authentication System]
+    LLM[LLM API]
+    
+    %% Level 2 Processes - User Management
+    P1_1[1.1\nUser Authentication]
+    P1_2[1.2\nProfile Management]
+    P1_3[1.3\nSession Handling]
+    
+    %% Level 2 Processes - Lesson Generation
+    P2_1[2.1\nTopic Analysis]
+    P2_2[2.2\nContent Creation]
+    P2_3[2.3\nPersonalization]
+    
+    %% Level 2 Processes - Quiz Management
+    P3_1[3.1\nQuestion Generation]
+    P3_2[3.2\nResponse Processing]
+    P3_3[3.3\nScore Calculation]
+    
+    %% Level 2 Processes - Feedback System
+    P4_1[4.1\nResponse Analysis]
+    P4_2[4.2\nFeedback Generation]
+    P4_3[4.3\nImprovement Suggestions]
+    
+    %% Level 2 Processes - Progress Tracking
+    P5_1[5.1\nMetric Collection]
+    P5_2[5.2\nPerformance Analysis]
+    P5_3[5.3\nReport Generation]
+    
+    %% Data Stores
+    DS1[(D1: Students)]
+    DS2[(D2: Sessions)]
+    DS3[(D3: Progress)]
+    DS4[(D4: Conversation History)]
+    
+    %% Student Interactions
+    Student -->|Login Credentials| P1_1
+    Student -->|Profile Information| P1_2
+    Student -->|Topic Selection| P2_1
+    Student -->|Learning Preferences| P2_3
+    Student -->|Quiz Answers| P3_2
+    P1_1 -->|Auth Status| Student
+    P1_2 -->|Profile Details| Student
+    P2_3 -->|Personalized Lesson| Student
+    P3_1 -->|Quiz Questions| Student
+    P4_3 -->|Improvement Suggestions| Student
+    P5_3 -->|Progress Report| Student
+    
+    %% Authentication System Interactions
+    P1_1 <-->|Auth Requests/Responses| Auth
+    
+    %% LLM API Interactions
+    P2_1 <-->|Topic Analysis Prompts| LLM
+    P2_2 <-->|Content Generation Prompts| LLM
+    P3_1 <-->|Quiz Generation Prompts| LLM
+    P4_2 <-->|Feedback Creation Prompts| LLM
+    
+    %% User Management Internal Flows
+    P1_1 -->|Verified User| P1_2
+    P1_1 -->|Session Token| P1_3
+    P1_2 <-->|Student Data| DS1
+    P1_3 -->|Session Creation| DS2
+    
+    %% Lesson Generation Internal Flows
+    P2_1 -->|Topic Structure| P2_2
+    P2_2 -->|Base Content| P2_3
+    P1_2 -->|Student Level| P2_3
+    P2_3 -->|Session Data| DS2
+    P2_3 -->|Conversation Data| DS4
+    
+    %% Quiz Management Internal Flows
+    P2_3 -->|Lesson Content| P3_1
+    P3_1 -->|Quiz Content| P3_2
+    P3_2 -->|Student Responses| P3_3
+    P3_2 -->|Response Data| DS4
+    
+    %% Feedback System Internal Flows
+    P3_3 -->|Quiz Results| P4_1
+    P1_2 -->|Student Level| P4_1
+    P4_1 -->|Analysis Results| P4_2
+    P4_2 -->|Feedback Content| P4_3
+    P4_3 -->|Feedback Data| DS3
+    
+    %% Progress Tracking Internal Flows
+    P3_3 -->|Score Data| P5_1
+    P4_2 -->|Feedback Summary| P5_1
+    P5_1 -->|Performance Metrics| P5_2
+    P5_1 -->|Session Performance| DS3
+    P5_2 -->|Analysis Results| P5_3
+    P5_2 <-->|Historical Data| DS3
+
 
 ## Development
 
-[Include development guidelines here]
+Clone the project:
+git clone https://github.com/vrd07/Ai_Tutor.git
+cd Ai_Tutor
+
+Set your environment:
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+Run the following command:
+cd src/backend/app
+uvicorn app.main:app --reload '''for backend'''
+streamlit run src/frontend/app.py '''for frontend'''
 
 # AI Personal Tutor - User Guide
 
