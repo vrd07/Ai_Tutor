@@ -28,22 +28,22 @@ An AI-powered tutoring system built with FastAPI and Streamlit, leveraging LLM t
 
 1. Clone the repository:
 
-git clone https://github.com/yourusername/ai-tutor.git
-cd ai-tutor
+- git clone https://github.com/yourusername/ai-tutor.git
+- cd ai-tutor
 
 2. Set up virtual environments and install dependencies:
 
-Backend
-cd backend
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
+- Backend
+- cd backend
+- python -m venv venv
+- source venv/bin/activate  # On Windows: venv\Scripts\activate
+- pip install -r requirements.txt
 
 Frontend
-cd ../frontend
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
+- cd ../frontend
+- python -m venv venv
+- source venv/bin/activate  # On Windows: venv\Scripts\activate
+- pip install -r requirements.txt
 
 3. Configure environment variables:
 - Create a `.env` file in the backend directory
@@ -214,8 +214,7 @@ For each test case, please provide:
 
 ## Troubleshooting
 
-[Include common issues and solutions]
 
 ## Contact Support
 
-[Include support contact information]
+- PHN :+91 7676148067
